@@ -1,0 +1,99 @@
+.hiden-div{
+    display: none;
+}
+      
+.toggle:checked ~ .hiden-div {
+    display: inline-block;
+}
+
+.word_link {
+    text-decoration: none;
+	color: #444;
+}
+
+.word_link:hover  {
+    text-decoration: none;
+	color: #444;
+}
+
+.word_link:hover {
+	text-decoration: none;
+    
+}
+
+td:hover {
+    cursor: pointer;
+}
+
+table td, table th {
+  word-break: break-word;
+}
+
+@media (max-width: 1000px) {
+  .container table thead {
+    display: none;
+  }
+
+  .container table tr {
+    display: block;
+    margin-bottom: .625em;
+  }
+
+  .container table td {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .container table td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    margin-right: 20px;
+  }
+
+  .container table tr {
+    padding: 10px;
+    border: 1px solid rgb(233, 233, 233);
+  }
+
+}
+
+.center {
+  justify-content: center;
+  text-align: center;
+}
+
+.card-box {
+  width: 100%;
+  height: 250px;
+  perspective: 1000px;
+  border-style: none;
+}
+
+.front, .back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 1s;
+  backface-visibility: hidden;
+  border-radius: 10px;
+}
+.front {
+  background-color: #ebf4ff;
+}
+.back {
+  background-color: #ebf4ff;
+  transform: rotateX(180deg);
+}
+
+.flippedF {
+  transform: rotateX(180deg);
+}
+
+.back.flippedB {
+  transform: rotateX(360deg);
+}

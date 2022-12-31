@@ -1,0 +1,31 @@
+{% load common_tags %}
+
+{% if page_obj.has_other_pages %}
+<div class="container">
+    <nav aria-label="page navigation" class="d-flex justify-content-center">
+        <ul class="pagination center-block mx-auto">
+            {% if page_obj.has_previous %}                                                      
+                <li class="page-item"><a class="page-link non_underline" href="?{% query_transform page=1 %}">&laquo;</a></li>
+                <li class="page-item"><a class="page-link non_underline" href="?{% query_transform page=page_obj.previous_page_number %}">&lsaquo;</a></li>
+            {% endif %}
+
+            {% for p in paginator.page_range %}
+                {% if page_obj.number == p %}
+                    <li class="page-item active">                
+                        <a class="page-link non_underline" href="?{% query_transform page=p %}">{{ p }}</a>
+                    </li>
+                {% elif p >= page_obj.number|add:-2 and p <= page_obj.number|add:2  %}
+                    <li class="page-item">
+                        <a class="page-link non_underline" href="?{% query_transform page=p %}">{{ p }}</a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+                <li class="page-item"><a class="page-link non_underline" href="?{% query_transform page=page_obj.next_page_number %}">&rsaquo;</a></li>
+                <li class="page-item"><a class="page-link non_underline" href="?{% query_transform page=page_obj.paginator.num_pages %}">&raquo;</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+</div>
+{% endif %}

@@ -1,0 +1,47 @@
+.text-bg-dark {
+    color: #fff!important;
+    background-color: RGBA(33,37,41,var(--bs-bg-opacity,1))!important;
+}
+
+a {
+	color: #0059b2;
+	text-decoration: none;
+}
+a:hover {
+	color: #CC0000;
+	text-decoration: underline;
+}
+
+a.non_underline{
+	text-decoration: none;
+}
+
+/*authentication*/
+.error-list ul li{
+	list-style-type: none;
+	color: #dc143c;
+}
+
+.error-list ul {
+	margin-left: 0;
+	padding-left: 0;
+}
+
+
+
+.table {
+	width: 100%;
+	margin-bottom: 20px;
+	border: 1px solid #dddddd;
+	border-collapse: collapse; 
+}
+.table th {
+	font-weight: bold;
+	padding: 5px;
+	background: #efefef;
+	border: 1px solid #dddddd;
+}
+.table td {
+	border: 1px solid #dddddd;
+	padding: 5px;
+}

@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block styles %}
+<link type="text/css" href="{% static 'articles/css/styles.css' %}" rel="stylesheet" />
+{% endblock %}
+
+{% block title%}
+Все статьи
+{% endblock %}
+
+{% block body%}
+<div class="container mt-5 ">
+    <div class="p-4 p-md-5 mb-4 rounded comtainer row text-bg-dark position-relative">
+        <div class="col-md-8">
+            <h1 class="display-4 fst-italic">{{articles.first.title}}</h1>
+            <div class="mb-1 text-muted">{{articles.first.date|date:"d-m-Y"}}</div>
+            <p class="lead my-3">
+                {% autoescape off %}
+                {{articles.first.text|linebreaks|truncatewords:20}}
+                {% endautoescape %}</p>
+            <p class="lead mb-0"><a href="{% url 'show_article' articles.first.slug %}" class="text-white fw-bold stretched-link">Продолжить чтение...</a></p>
+        </div>
+        <div class="col-md-4">
+            <img class="card-img" src="{{articles.first.preview_photo.url}}">
+        </div>
+    </div>
+    {% for article in articles|slice:"1:" %}
+    <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative" height="850">
+        <div class="col p-4 d-flex flex-column position-static">
+            <strong class="d-inline-block mb-2 text-primary">Статьи</strong>
+            <h3 class="mb-0">{{article.title}}</h3>
+            <div class="mb-1 text-muted">{{article.date|date:"d-m-Y"}}</div>
+            <p class="mb-auto">
+                {% autoescape off %}
+                {{article.text|linebreaks|truncatewords:20}}
+                {% endautoescape %}
+            </p>
+            <a href="{% url 'show_article' article.slug %}" class="stretched-link">Продолжить чтение...</a>
+        </div>
+        <div class="col-auto d-none d-lg-block m-4">
+            <img class="img-article-left" width="200" height="250" src="{{article.preview_photo.url}}">
+        </div>
+    </div>
+    {% endfor %}
+    {% include 'inc/_pagination.html' %}
+</div>
+{% endblock %}

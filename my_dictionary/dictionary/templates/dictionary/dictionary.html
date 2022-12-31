@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block styles %}
+<link type="text/css" href="{% static 'dictionary/css/styles.css' %}" rel="stylesheet" />
+{% endblock %}
+
+{% block scripts %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script src="{% static 'dictionary/js/dictionary_scripts.js' %}"></script>
+{% endblock %}
+
+{% block title%}
+Мой словарь
+{% endblock %}
+
+{% block body%}
+<div class="container mt-5">
+<h1>Мой словарь</h1>
+<div class="row row-cols-1 row-cols-md-3 mt-3 mb-3 text-center">
+    <div class="col">
+      <div class="card mb-4 rounded-3 shadow-sm">
+        <div class="card-header py-3">
+          <h4 class="my-0 fw-normal">Статистика</h4>
+        </div>
+        <div class="card-body">
+          <ul class="list-unstyled mt-3 mb-4">
+            <li>Всего слов: {{words_total_number}}</li>
+            <li>Повторить сегодня: {{words_for_today_number}}</li>
+            <li>Выученные слова: {{learned_words_number}}</li>
+          </ul>
+          <a href="{% url 'adding_word' %}" class="w-100 btn btn-lg btn-outline-primary non_underline mt-3">Добавить новые слова</a>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card mb-4 rounded-3 shadow-sm">
+        <div class="card-header py-3">
+          <h4 class="my-0 fw-normal">Тренировка</h4>
+        </div>
+        <div class="card-body text-start">
+          <form id="start-test-form">
+            <ul class="list-unstyled mt-3 mb-4">
+              <div class="list-group mx-0 w-auto">
+
+                <label class="d-flex gap-2">
+                  <input class="form-check-input flex-shrink-0" type="radio" name="testing-mode" id="writte-test" value="" checked="">
+                  <span>
+                    Письменное задание
+                    <small class="d-block text-muted">Напишите по памяти иностранное слово</small>
+                  </span>
+                </label>
+                <label class="d-flex gap-2">
+                  <input class="form-check-input flex-shrink-0" type="radio" name="testing-mode" id="cards" value="">
+                  <span>
+                    Карточки
+                    <small class="d-block text-muted">Старый и известный способ самопроверки</small>
+                  </span>
+                </label>                  
+                </div>
+            </ul>
+            <a href="{% url 'test' %}" id="start-test-button" class="w-100 btn btn-lg btn-outline-primary non_underline">Экспресс тест</a>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+<div class="card mb-4 rounded-3 shadow-sm">
+    <div class="container my-4 ">
+      <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" id="search-form" role="search" action="">
+          <div class="d-flex">          
+              <div class="input-group has-validation">
+                  <span class="input-group-text">🔎</span>
+                  <input type="text" id="site-search" name="search-quesry" class="form-control" placeholder="Поиск" aria-label="Search" value="{{search_query}}">
+                  <button type="button" id="site-search-reset" class="input-group-text btn btn-lg btn-outline-secondary">X</button>
+                </div>
+              <div class="px-2">
+                  <button type="submit" class="w-100 btn btn-lg btn-outline-primary">Поиск</button>
+              </div>
+          </div>
+      </form>
+    </div>
+    <div class = "container my-2">
+      <table class="table table-hover">    
+          <thead>
+              <th>№</th>
+              <th>Слово</th>
+              <th>Перевод</th>
+              <th>Контекст</th>
+              <th>Cледующее повторение</th>
+              <th>Номер коробки</th>
+          </thead>
+          <tbody>
+          {% for word in word_list %}
+          <tr class='clickable-row' data-href="{% url 'edit' %}?id={{word.id}}">
+                  <td data-label="№">{{forloop.counter0|add:page_obj.start_index}}</td>
+                  <td data-label="Слово">{{word.russian_word}}</td>
+                  <td data-label="Перевод">{{word.foreign_word}}</td>
+                  <td data-label="Контекст">{{word.context}}</td>
+                  <td data-label="Cледующее повторение">{{word.asking_date}}</td>
+                  <td data-label="Номер коробки">{{word.box_number}}</td>
+          </tr>      
+          {% endfor %}
+          </tbody>
+      </table>
+      {% include 'inc/_pagination.html' %}
+  </div>
+  </div>
+</div>
+{% endblock %}

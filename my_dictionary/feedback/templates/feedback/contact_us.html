@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title%}
+Контакты
+{% endblock %}
+
+{% block body%}
+<div class="container mt-5">
+    <h1>Свяжитесь с нами</h1>
+    <div>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert {{message.tags}} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+        <form method="POST">
+            {% csrf_token %}
+            <div class="row g-2">
+                <div class="col-md">
+                    <div class="form-floating mb-3">
+                        {{ form.name }}
+                        <label for="username">Имя</label>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="form-floating mb-3">
+                        {{ form.email }}
+                        <label for="username">E-mail</label>
+                    </div>
+                </div>
+                </div>
+            <div class="mb-3">
+                <label for="username">Сообщение:</label>
+                {{ form.message }}
+            </div>
+            <button type="submit" class="btn btn-outline-primary">Отправить</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

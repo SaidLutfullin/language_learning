@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block styles %}
+<link type="text/css" href="{% static 'dictionary/css/styles.css' %}" rel="stylesheet" />
+{% endblock %}
+
+{% block scripts %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script src="{% static 'dictionary/js/cards_scripts.js' %}"></script>
+{% endblock %}
+
+{% block title%}
+Мои карточки
+{% endblock %}
+
+{% block body%}
+<main class="container">
+    <div class="bg-light p-5 rounded">
+        <div class="container">
+            <h1>Мои карточки</h1>
+            <div class="container my-5">
+                <div class="card-box">
+                    <div id ="front" class="front">
+                        <div class="center">
+                            
+                            <h3 class="card-text mb-5">{{question}}</h3>
+                            <button id="flip-btn1" class="btn btn-primary">Перевернуть</button>
+                        </div>
+                    </div>
+                    <div id="back" class="back">
+                        <div class="center">
+                            <h3 class="card-text">{{russian_word}} - {{answer}}</h3>
+                            <h3 class="card-text my-3">Прочиатай вслух: {{read_aloud|safe}}</h3>
+                            <button id="flip-btn2" class="btn btn-primary">Перевернуть</button>
+                        </div>            
+                  </div>
+                </div>
+            </div>
+        
+        
+            <div class="container center my-5">
+                <form method="POST">
+                    {% csrf_token %}
+                    <button type="submit" name="correct" class="btn btn-outline-success">Помню</button>
+                    <button type="submit" name="incorrect" class="btn btn-outline-danger">Не помню</button>
+                </form>
+            </div>
+        
+        </div>        
+    </div>
+</main>
+{% endblock  %}

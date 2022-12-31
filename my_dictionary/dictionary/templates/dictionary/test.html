@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title%}
+Пиьсменный опрос
+{% endblock %}
+
+{% block scripts %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script src="{% static 'dictionary/js/test_scripts.js' %}"></script>
+{% endblock %}
+
+{% block body%}
+<main class="container">
+    <div class="bg-light p-5 rounded">
+        <h1>Письменный опрос</h1>
+        <div class="my-5">
+            {% if read_aloud == "" %}
+            <form method="POST">
+                {% csrf_token %}
+                <h3>{{ question }}</h3>
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-outline-primary">Ответ</button>
+                {% if help != "" %}
+                <div class="alert alert-warning m-2">
+                    <p>Подсказка: {{ help }}</p>
+                </div>
+                {% endif %}
+            </form>
+            {% else %}
+                <div class="alert alert-warning">
+                    <h2>Верно!</h2>
+                    <h4 class="card-text">{{russian_word}} - {{answer}}</h4>
+                    <h2>Прочитай вслух:</h2> 
+                    <h4>{{ read_aloud|safe }}</h4>
+                    <p><a id="read_aloud" href="{% url 'test' %}" class="btn btn-outline-success non_underline">Окей</a></p>
+                </div>
+            {% endif %} 
+        </div>   
+    </div>
+  </main>
+{% endblock %}

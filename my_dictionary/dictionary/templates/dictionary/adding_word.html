@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title%}
+Добавление нового слова
+{% endblock %}
+
+{% block body%}
+<div class="container bg-light p-5 rounded">
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <small class="d-block text-muted">Скопируй отсюда: Ä ä Ü ü Ö ö ß</small>
+        <button type="submit" class="btn btn-outline-primary">Добавить</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title%}
+Редактирование профиля
+{% endblock %}
+
+{% block body%}
+<div class="container">
+    <h1 class="my-4">Редактирование профиля</h1>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}  
+        <div class="container  mx-24">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <h6 class="mb-0">Аватар</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">{{form.avatar}}</div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <h6 class="mb-0">Имя</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">{{form.first_name}}</div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <h6 class="mb-0">Фамилия</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">{{form.last_name}}</div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <h6 class="mb-0">Пол</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">{{form.gender}}</div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <h6 class="mb-0">Имя пользователя</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">{{form.username}}</div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <h6 class="mb-0">Email</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">{{form.email}}</div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <h6 class="mb-0">Мои языки</h6>
+                        </div><div class="col-sm-9 text-secondary">{{form.language_learned}}</div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <h6 class="mb-0">Обо мне</h6>
+                        </div><div class="col-sm-9 text-secondary">{{form.about_me}}</div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <span>Для смены пароля перейдите по <a href="{% url 'password_change' %}">ссылке</a></span>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <button class="btn btn-info" type="submit">Сохранить</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+{% endblock %}

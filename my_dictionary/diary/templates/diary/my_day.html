@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title%}
+Мой дневник
+{% endblock %}
+
+{% block styles %}
+<link href="{% static 'django_ckeditor_5/dist/styles.css' %}" type="text/css" media="all" rel="stylesheet">
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'django_ckeditor_5/dist/bundle.js' %}"></script>
+<script src="{% static 'django_ckeditor_5/dist/translations/ru.js' %}"></script>
+{% endblock %}
+
+{% block body%}
+<div class="ck-content container mt-5">
+    <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-outline-primary">Сохранить</button>
+    <a href="delete" class="btn btn-outline-danger non_underline">Удалить</a>
+    </form>
+</div>
+{% endblock%}

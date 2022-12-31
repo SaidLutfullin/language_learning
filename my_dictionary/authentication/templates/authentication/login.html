@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block styles %}
+<link type="text/css" href="{% static 'authentication/css/styles.css' %}" rel="stylesheet" />
+{% endblock %}
+
+{% block title%}
+Вход
+{% endblock %}
+
+{% block body%}
+<div class="container col-xl-10 col-xxl-8 px-4 py-5">
+    <div class="row align-items-center g-lg-5 py-5">
+      <div class="col-lg-7 text-center text-lg-start">
+        <h1 class="display-4 fw-bold lh-1 mb-3">Авторизация</h1>
+        <p class="col-lg-10 fs-4">Авторизованным пользователям доступны личный дневник и личный словарь с возможностью автоматического повторения слов.</p>
+      </div>
+      <div class="col-md-10 mx-auto col-lg-5">
+        <form class="p-4 p-md-5 border rounded-3 bg-light" method="post">
+            {% csrf_token %}
+          <div class="form-floating mb-3">
+            {{ form.username }}
+            <label for="username">Имя пользователя</label>
+          </div>
+          <div class="form-floating mb-3">
+            {{ form.password }}
+            <label>Пароль</label>
+          </div>
+          {% include 'authentication/inc/_form_errors.html' %}
+          <button class="w-100 btn btn-lg btn-primary" type="submit">Войти</button>
+          <hr class="my-4">
+          <small class="text-muted">Еще нет аккаунта? <a href="{% url 'register' %}">Зарегистрируйтесь</a></small>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}

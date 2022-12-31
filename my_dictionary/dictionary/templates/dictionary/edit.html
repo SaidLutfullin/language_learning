@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block styles %}
+<link type="text/css" href="{% static 'dictionary/css/styles.css' %}" rel="stylesheet" />
+{% endblock %}
+
+{% block title%}
+Редактирование слова
+{% endblock %}
+
+{% block body%}
+<div class="container mt-5">
+    <h1>Редактирование слова</h1>
+    <form method="post">
+       {% csrf_token %}    
+       <p>
+            {{ form.russian_word.label_tag }}
+            {{ form.russian_word }}
+        </p>
+        <p>
+            {{ form.foreign_word.label_tag }}
+            {{ form.foreign_word }}
+        </p>
+        <p>
+            {{ form.context.label_tag }}
+            {{ form.context }}
+        </p>
+        <div class="mb-3">
+            {{ form.from_scratch }}
+            {{ form.from_scratch.label_tag }}<br>
+            <div class="hiden-div" id="input-date">
+                {{ form.asking_date.label_tag }}
+                {{ form.asking_date }}
+            </div>
+        </div>
+       <button type="submit" name="save" class="btn btn-success">Сохранить</button>
+       <button type="submit" name="delete" class="btn btn-danger">Удалить</button>
+    </form>
+</div>
+{% endblock %}

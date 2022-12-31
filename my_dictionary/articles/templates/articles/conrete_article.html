@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block styles %}
+<link type="text/css" href="{% static 'articles/css/styles.css' %}" rel="stylesheet" />
+<link type="text/css" href="{% static 'css/tables.css' %}" rel="stylesheet" />
+{% endblock %}
+
+{% block title%}
+{{ article.title }}
+{% endblock %}
+
+{% block body%}
+<div class="container mt-5">
+    <h1>{{ article.title }}</h1>
+    <p>Дата: {{ article.date|date:"d.m.Y" }}</p>
+    <p><img class="article" src="{{ article.preview_photo.url }}"></p>
+    {% autoescape off %}
+    {{article.text|linebreaks}}
+    {% endautoescape %}
+</div>
+{% endblock %}

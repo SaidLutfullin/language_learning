@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block styles %}
+<link type="text/css" href="{% static 'css/tables.css' %}" rel="stylesheet" />
+{% endblock %}
+
+{% block title%}
+{% if day.title == '' %}
+    {{ day.date|date:"d.m.Y" }}
+{% else %}
+    {{ day.title }}
+{% endif %}
+{% endblock %}
+
+{% block body%}
+<div class="container mt-5 alert article-panel">
+    {% if day.title == '' %}
+    <h1 class="mb-0">{{ day.date|date:"d.m.Y" }}</h1>
+    {% else %}
+    <h1 class="mb-0">{{ day.title }}</h1>
+    {% endif %}
+    <p>Дата: {{ day.date|date:"d.m.Y" }}</p>
+   {% autoescape off %}
+   {{day.text|linebreaks}}
+   {% endautoescape %}
+    <a href="{{day.pk}}/edit" class="btn btn-outline-primary non_underline" >Редачить</a>
+</div>
+{% endblock %}

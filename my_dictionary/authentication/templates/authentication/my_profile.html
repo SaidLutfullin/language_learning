@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title%}
+Мой профиль
+{% endblock %}
+
+{% block body%}
+<div class="container">
+    <div class="main-body">
+        <div class="row gutters-sm">
+            <div class="col-md-4 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex flex-column align-items-center text-center">
+                            {% if request.user.avatar %}
+                            <img src="{{request.user.avatar.url}}" alt="Admin" class="rounded-circle" width="150">
+                            {% else %}
+                            <img src="{% static '/images/anonymous.png' %}" alt="Admin" class="rounded-circle" width="150">
+                            {% endif %}
+                            <div class="mt-3">
+                                <h4>{{request.user.first_name}} {{request.user.last_name}}</h4>
+                                <p class="text-muted font-size-sm">Я учу 
+                                    {% if request.user.language_learned %}
+                                    {{request.user.language_learned}}
+                                    {% else %}
+                                    иностранный язык
+                                    {% endif %}
+                                </p>
+                                <a class="btn btn-outline-primary non_underline" href="{% url 'dictionary' %}">Мой словарь</a>
+                                <a class="btn btn-outline-primary non_underline" href="{% url 'my_diary' %}">Мой дневник</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mt-3">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                            <h6 class="mb-0">
+                                Всего слов:
+                            </h6>
+                            <span class="text-secondary">{{words_total_number}}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                            <h6 class="mb-0">
+                                Повторить сегодня
+                            </h6>
+                            <span class="text-secondary">{{words_for_today_number}}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                            <h6 class="mb-0">
+                                Выученные слова
+                            </h6>
+                            <span class="text-secondary">{{learned_words_number}}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                            <h6 class="mb-0">
+                                Записей в дневнике
+                            </h6>
+                            <span class="text-secondary">{{diary_entry_count}}</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Имя</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">{{request.user.first_name}}</div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Фамилия</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">{{request.user.last_name}}</div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Пол</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">{{request.user.get_gender_display}}</div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Имя пользователя</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">{{request.user.username}}</div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Email</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">{{request.user.email}}</div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Обо мне</h6>
+                            </div><div class="col-sm-9 text-secondary">{{request.user.about_me}}</div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <a class="btn btn-info non_underline" href="{% url 'my_profile_edit' %}">Редактировать</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

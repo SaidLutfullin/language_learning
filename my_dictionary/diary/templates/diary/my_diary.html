@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block styles %}
+<link type="text/css" href="{% static 'css/tables.css' %}" rel="stylesheet" />
+{% endblock %}
+
+{% block title%}
+Мой дневник
+{% endblock %}
+
+{% block body%}
+<div class="container  mt-5">
+    <div class="container rounded mt-5 text-bg-dark">
+        <div class="p-4 p-md-5 mb-4 rounded">
+            <div class="col-md-6 px-0">
+            <h1 class="display-4 fst-italic">Мой дневник</h1>
+            <p class="lead my-3">Дневник помогает хранить всю информацию о вашем прогрессе в языке в одном месте. Он позволяет избежать беспорядка, который мы создаем заметками и листками бумаги.</p>
+            <a class="btn btn-outline-warning rounded-pill non_underline" href="{% url 'new_day' %}">Добавить новый день</a>
+            </div>
+        </div>
+    </div>
+    <div class="container  mt-5">
+    {% for p in object_list %}
+        <div class="col-md-12">
+        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+            <div class="col p-4 d-flex flex-column position-static">
+            <strong class="d-inline-block mb-2 text-primary">Дневник</strong>
+            {% if p.title == '' %}
+            <h3 class="mb-0">{{ p.date|date:"d.m.Y" }}</h3>
+            {% else %}
+            <h3 class="mb-0">{{ p.title }}</h3>
+            {% endif %}
+            <div class="mb-1 text-muted">{{ p.date|date:"d.m.Y" }}</div>
+            <p class="card-text mb-auto">{{ p.text|safe|truncatewords_html:25}}</p>
+            <a href="my_diary/{{p.pk}}" class="stretched-link">Читать полностью</a>
+            </div>
+            <div class="col-auto d-none d-lg-block mt-4 me-4">
+                <img src="{% static '/images/diary.png' %}" alt="diary" width="350" height="230">
+            </div>
+        </div>
+        </div>
+    {% endfor %}
+    {% include 'inc/_pagination.html' %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title%}
+Удаление записи в дневнике
+{% endblock %}
+
+{% block body%}
+<div class="container mt-5 alert article-panel">
+    <form method="post">
+        {% csrf_token %}
+        <p>Уверены что хотите удалить к чертям запись из дневника?</p>
+        <button type="submit" class="btn btn-outline-danger">Подтвердить</button>
+    </form>
+</div>
+{% endblock%}
